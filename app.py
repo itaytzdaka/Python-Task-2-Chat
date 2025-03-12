@@ -10,6 +10,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+# Implemented by Yuval
 @app.route('/<room>')
 def room(room):
         return render_template('index.html')
@@ -20,6 +21,7 @@ def api(room):
 
     room_file_path = f"rooms/{room}.txt"
 
+# Implemented by Yuval
     if request.method == "POST":
         usr = request.form["username"]
         msg = request.form["msg"]
