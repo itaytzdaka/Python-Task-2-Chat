@@ -10,6 +10,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+# Implemented by Yuval
 @app.route('/<room>')
 def room(room):
         return render_template('index.html')
@@ -20,21 +21,21 @@ def api(room):
 
     room_file_path = f"rooms/{room}.txt"
 
+# Implemented by Yuval
     if request.method == "POST":
         usr = request.form["username"]
         msg = request.form["msg"]
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
-        file_path = f"rooms/{room}.txt"
 
         os.makedirs("rooms", exist_ok=True)
 
-        if not os.path.isfile(file_path):
-            with open(file_path, 'w', encoding='utf-8') as file:
+        if not os.path.isfile(room_file_path):
+            with open(room_file_path, 'w', encoding='utf-8') as file:
                 file.write(f"[{date}] {usr} : {msg}\n") 
         else:
-            with open(file_path, 'a', encoding='utf-8') as file:
+            with open(room_file_path, 'a', encoding='utf-8') as file:
                 file.write(f"[{date}] {usr} : {msg}\n") 
 
         return f"Message saved: [{date}] {usr} : {msg}"
