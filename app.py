@@ -2,9 +2,15 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/<room>')
+
+@app.route('/')
 def home(room):
     return render_template('index.html')
+
+@app.route('/<room>')
+def room(room):
+    return render_template('index.html')
+
 
 if __name__== "__main__":
     app.run()
