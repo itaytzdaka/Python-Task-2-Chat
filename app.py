@@ -5,6 +5,7 @@ import os
 
 app = Flask(__name__)
 
+# Implemented by Itay
 @app.route('/.')
 @app.route('/')
 def home():
@@ -21,7 +22,7 @@ def api(room):
 
     room_file_path = f"rooms/{room}.txt"
 
-# Implemented by Yuval
+    # Implemented by Yuval
     if request.method == "POST":
         usr = request.form["username"]
         msg = request.form["msg"]
@@ -39,6 +40,8 @@ def api(room):
                 file.write(f"[{date}] {usr} : {msg}\n") 
 
         return f"Message saved: [{date}] {usr} : {msg}"
+
+    # Implemented by Itay
     else:
         try:
             with open(room_file_path, "r", encoding="utf-8") as file:
