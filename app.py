@@ -12,7 +12,7 @@ def room(room):
     return render_template('index.html')
 
 @app.route("/api/chat/<room>", methods=["GET", "POST"])
-def room_chat(room):
+def api(room):
 
     room_file_path = f"rooms/{room}.txt"
 
