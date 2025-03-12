@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-
+@app.route('/.')
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -15,8 +15,11 @@ def room(room):
         return render_template('index.html')
     
 
-@app.route('/api/chat/<room>', methods=["POST", "GET"])
-def post(room):
+@app.route("/api/chat/<room>", methods=["GET", "POST"])
+def api(room):
+
+    room_file_path = f"rooms/{room}.txt"
+
     if request.method == "POST":
         usr = request.form["username"]
         msg = request.form["msg"]
@@ -35,8 +38,14 @@ def post(room):
                 file.write(f"[{date}] {usr} : {msg}\n") 
 
         return f"Message saved: [{date}] {usr} : {msg}"
-    else: 
-        return "itay part"
+    else:
+        try:
+            with open(room_file_path, "r", encoding="utf-8") as file:
+                return file.read()
+        except FileNotFoundError:
+            return ""  # Return empty string if file does not exist
+
+
 
 if __name__== "__main__":
     app.run()
