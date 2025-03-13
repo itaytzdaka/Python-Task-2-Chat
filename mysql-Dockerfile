@@ -1,0 +1,12 @@
+FROM mysql:9.2.0 
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=chatdb
+ENV MYSQL_USER=chatuser
+ENV MYSQL_PASSWORD=chatpassword
+
+# Copy initialization script
+COPY init.sql /docker-entrypoint-initdb.d/
+
+
